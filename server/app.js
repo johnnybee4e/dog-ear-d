@@ -3,6 +3,14 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+const admin = require('firebase-admin');
+const serviceAccount = require('../serviceAccountKey.json');
+const firebaseURL = process.env.FIREBASE_DB_URL;
+
+admin.initializeApp(({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://dog-ear-d.firebaseio.com/"
+}))
 
 
 
