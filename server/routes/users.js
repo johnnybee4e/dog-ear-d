@@ -3,7 +3,7 @@ var express = require("express");
 var router = express.Router();
 const admin = require('firebase-admin');
 const database = admin.database();
-const ref = database.ref('users')
+const ref = database.ref('users');
 
 /* GET users listing. */
 router.get("/", function(req, res, next) {

@@ -3,19 +3,18 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-const admin = require('firebase-admin');
-const serviceAccount = require('../serviceAccountKey.json');
+const admin = require("firebase-admin");
+const serviceAccount = require("../serviceAccountKey.json");
 const firebaseURL = process.env.FIREBASE_DB_URL;
 
-admin.initializeApp(({
+admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://dog-ear-d.firebaseio.com/"
-}))
-
-
+});
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
+const booksRouter = require("./routes/books");
 
 const app = express();
 
@@ -31,6 +30,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/books", booksRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
